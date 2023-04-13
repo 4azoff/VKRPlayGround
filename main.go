@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"log"
 	"net/http"
 
@@ -39,8 +38,6 @@ func Run(cnfName *string) {
 }
 
 func main() {
-	cnfName := flag.String("config", "config/config.yml", "config name")
-	flag.Parse()
-
-	Run(cnfName)
+	cfgPath := "config/config.yaml"
+	Run(&cfgPath)
 }

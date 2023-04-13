@@ -1,0 +1,15 @@
+version: "3.9"
+networks:
+  network:
+    driver: bridge
+
+services:
+  play_go:
+    build: .
+    container_name: play_go
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+    user: root
+    restart: on-failure

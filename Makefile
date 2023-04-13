@@ -1,19 +1,15 @@
-current_dir := $(dir $(mkfile_path))
+run:
+	docker compose build --no-cache
+	docker compose up -d
+#	docker compose logs -f
 
-default: build
+stop:
+	docker compose stop
 
-clean:
-	@echo "Cleaning up previous build..."
-	@rm -f  $(current_dir)bin/*
-	@rm -rf $(current_dir)go_binary_files
-	@rm -rf $(current_dir)go_files
+down:
+	docker compose down
 
-build: clean
-	@echo "Building app..."
-	@mkdir go_binary_files
-	@mkdir go_files
-	@go build -o bin/playgo main.go
+logs:
+	docker compose logs -f
 
-test:
-	@echo "Testing app..."
-	@go test ./...
+restart: down run

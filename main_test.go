@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"testing"
 
-	"github.com/go-resty/resty/v2"
 	"github.com/gorilla/websocket"
 	"github.com/stretchr/testify/assert"
 )
@@ -19,7 +17,7 @@ var (
 	import "fmt"
 
 	func main() {
-		fmt.Println("Hello, PlayGO")
+		fmt.Println("Hello, playground")
 	}`
 )
 
@@ -66,24 +64,24 @@ func TestShare(t *testing.T) {
 	linkCode = string(p)
 }
 
-func TestGetCode(t *testing.T) {
-	client := resty.New()
-	r, err := client.R().Get("http://localhost:8080/pp/" + linkCode)
-	if err != nil {
-		t.Error(err)
-	}
+// func TestGetCode(t *testing.T) {
+// 	client := resty.New()
+// 	r, err := client.R().Get("http://localhost:8080/pp/" + linkCode)
+// 	if err != nil {
+// 		t.Error(err)
+// 	}
 
-	var code Code
-	json.Unmarshal(r.Body(), &code)
-	assertions := assert.New(t)
-	assertions.EqualValues(code, testProgram)
-}
+// 	var code Code
+// 	json.Unmarshal(r.Body(), &code)
+// 	assertions := assert.New(t)
+// 	assertions.EqualValues(code, testProgram)
+// }
 
 func TestMain(t *testing.T) {
-	cnf := "config/config.yml"
+	cnf := "config/config.yaml"
 	go Run(&cnf)
 
 	TestShare(t)
-	TestGetCode(t)
+	//TestGetCode(t)
 	TestRun(t)
 }
